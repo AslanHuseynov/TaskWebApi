@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApiProject.Dtos;
 using WebApiProject.Repositories.BookRepository;
 
 namespace WebApiProject.Controllers
@@ -32,8 +32,9 @@ namespace WebApiProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Book>>> AddBook(Book book)
+        public async Task<ActionResult<List<Book>>> AddBook(CreateBookDto bookDto)
         {
+            var book = new Book() { Description = bookDto.Description, Title = bookDto.Title, PublishDate = bookDto.PublishDate, Rating = bookDto.Rating };
             var result = await _bookRepository.AddBook(book);
             return Ok(result);
         }

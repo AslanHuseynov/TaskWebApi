@@ -53,7 +53,7 @@ namespace WebApiProject.Repositories.BookRepository
             book.Title = req.Title;
             book.Description = req.Description;
             book.Rating = req.Rating;
-            book.CreateDate = req.CreateDate;
+            book.PublishDate = req.PublishDate;
             book.IsBought = req.IsBought;
 
             await _context.SaveChangesAsync();
