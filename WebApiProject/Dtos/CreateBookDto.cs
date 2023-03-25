@@ -5,6 +5,6 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public double Rating { get; set; }
-        public DateTime PublishDate { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebApiProject.Dtos;
 using WebApiProject.Repositories.BookRepository;
 
@@ -8,11 +9,12 @@ namespace WebApiProject.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        public readonly IBookRepository _bookRepository; 
-
-        public BookController(IBookRepository bookRepository)
+        private readonly IBookRepository _bookRepository;
+        private readonly IMapper _mapper;
+        public BookController(IBookRepository bookRepository, IMapper mapper)
         {
             _bookRepository = bookRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,7 +36,7 @@ namespace WebApiProject.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Book>>> AddBook(CreateBookDto bookDto)
         {
-            var book = new Book() { Description = bookDto.Description, Title = bookDto.Title, PublishDate = bookDto.PublishDate, Rating = bookDto.Rating };
+            var book = _mapper.Map<Book>(bookDto);
             var result = await _bookRepository.AddBook(book);
             return Ok(result);
         }
@@ -53,7 +55,7 @@ namespace WebApiProject.Controllers
         public async Task<ActionResult<Book>> DeleteBook(int id)
         {
             var result = await _bookRepository.DeleteBook(id);
-            if (result is null) 
+            if (result is null)
                 return BadRequest("Something is wrong");
 
             return Ok(result);
