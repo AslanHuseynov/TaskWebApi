@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApiProject.Dtos.BookDto;
-using WebApiProject.Repositories.AuthorRepository;
+using WebApiProject.Repositories.Author2BookRepository;
 using WebApiProject.Repositories.BookRepository;
 
 namespace WebApiProject.Controllers
@@ -10,11 +10,10 @@ namespace WebApiProject.Controllers
     public class BookController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
-        private readonly IAuthorRepository _authorRepository;
-        public BookController(IBookRepository bookRepository, IAuthorRepository authorRepository)
+
+        public BookController(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
-            _authorRepository = authorRepository;
         }
 
         [HttpGet]
@@ -22,7 +21,6 @@ namespace WebApiProject.Controllers
         {
             return await _bookRepository.GetAllBooks();
         }
-
         [HttpGet("id")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
@@ -32,7 +30,6 @@ namespace WebApiProject.Controllers
 
             return Ok(result);
         }
-
 
 
         [HttpPost]
@@ -60,6 +57,7 @@ namespace WebApiProject.Controllers
             var result = await _bookRepository.DeleteBook(id);
             if (result is null)
                 return BadRequest("Something is wrong");
+            
 
             return Ok(result);
         }

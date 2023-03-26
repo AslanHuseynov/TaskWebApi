@@ -1,5 +1,6 @@
 global using WebApiProject.Models;
 using WebApiProject.DB;
+using WebApiProject.Repositories.Author2BookRepository;
 using WebApiProject.Repositories.AuthorRepository;
 using WebApiProject.Repositories.BookRepository;
 
@@ -13,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IAuthor2BookRepository, Author2BookRepository>();
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 

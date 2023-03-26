@@ -10,14 +10,24 @@ namespace WebApiProject.Repositories.AuthorRepository
         public AuthorRepository(DataContext context, IMapper mapper) : base(context, mapper)
         {
         }
+        private IQueryable<Author> Entities => _dbContext.Authors.Include(x => x.AuthorBooks);
+
         public async Task<Author> AddAuthor(CreateAuthorDto createAuthorDto)
         {
             var author = _mapper.Map<Author>(createAuthorDto);
             return await AddEntity(author);
         }
         public async Task<List<Author>?> DeleteAuthor(int id) => await DeleteEntity(id);
-        public async Task<List<Author>> GetAllAuthors() => await GetAllEntity();
-        public async Task<Author?> GetAuthor(int id) => await GetEntity(id);
+        public async Task<List<Author>> GetAllAuthors()
+        {
+            return await Entities.ToListAsync();
+        }
+
+        public async Task<Author?> GetAuthor(int id)
+        {
+            return await Entities.SingleOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<List<Author>?> UpdateAuthor(UpdateAuthorDto updateAuthorDto)
         {
             var req = _mapper.Map<Author>(updateAuthorDto);
