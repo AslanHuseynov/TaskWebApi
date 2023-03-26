@@ -4,7 +4,7 @@
     {
         Task<List<Author>> GetAllAuthors();
         Task<Author?> GetAuthor(int id);
-        Task<List<Author>> AddAuthor(Author Author);
+        Task<Author> AddAuthor(Author author);
         Task<List<Author>?> UpdateAuthor(int id, Author req);
         Task<List<Author>?> DeleteAuthor(int id);
     }
