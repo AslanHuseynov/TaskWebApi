@@ -1,11 +1,14 @@
-﻿namespace WebApiProject.Repositories.AuthorRepository
+﻿using WebApiProject.Dtos.AuthorDto;
+using WebApiProject.Dtos.BookDto;
+
+namespace WebApiProject.Repositories.AuthorRepository
 {
     public interface IAuthorRepository
     {
         Task<List<Author>> GetAllAuthors();
         Task<Author?> GetAuthor(int id);
-        Task<Author> AddAuthor(Author author);
-        Task<List<Author>?> UpdateAuthor(int id, Author req);
+        Task<Author> AddAuthor(CreateAuthorDto author);
+        Task<List<Author>?> UpdateAuthor(UpdateAuthorDto updateAuthorDto);
         Task<List<Author>?> DeleteAuthor(int id);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using System.Diagnostics.Metrics;
+using WebApiProject.Dtos.AuthorDto;
 using WebApiProject.Dtos.BookDto;
-using WebApiProject.Models;
 
 namespace WebApiProject.Profiles
 {
@@ -11,6 +10,8 @@ namespace WebApiProject.Profiles
         {
             CreateMap<Book, CreateBookDto>().ReverseMap();
             CreateMap<Book, UpdateBookDto>().ReverseMap();
+            CreateMap<Author, CreateAuthorDto>().ReverseMap();
+            CreateMap<Author, UpdateAuthorDto>().ReverseMap();
         }
     }
 }
