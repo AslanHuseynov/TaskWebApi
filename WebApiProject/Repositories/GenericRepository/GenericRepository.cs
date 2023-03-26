@@ -7,7 +7,7 @@ namespace WebApiProject.Repositories.GenericRepository
     public class GenericRepository<T> : IGenericRepository<T> where T : BusinessObject
     {
         private readonly DataContext _dbContext;
-        private readonly IMapper _mapper;
+        protected readonly IMapper _mapper;
         public GenericRepository(DataContext context, IMapper mapper)
         {
             _dbContext = context;
@@ -17,6 +17,7 @@ namespace WebApiProject.Repositories.GenericRepository
         public async Task<T> AddEntity(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
             return entity;
         }
 

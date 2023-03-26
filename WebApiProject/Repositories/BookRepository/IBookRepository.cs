@@ -1,11 +1,13 @@
-﻿namespace WebApiProject.Repositories.BookRepository
+﻿using WebApiProject.Dtos.BookDto;
+
+namespace WebApiProject.Repositories.BookRepository
 {
     public interface IBookRepository
     {
         Task<List<Book>> GetAllBooks();
         Task<Book?> GetBook(int id);
-        Task<Book> AddBook(Book book);
-        Task<List<Book>?> UpdateBook(int id, Book req);
+        Task<Book> AddBook(CreateBookDto createBookDto);
+        Task<List<Book>?> UpdateBook(UpdateBookDto updateBookDto);
         Task<List<Book>?> DeleteBook(int id);
     }
 }

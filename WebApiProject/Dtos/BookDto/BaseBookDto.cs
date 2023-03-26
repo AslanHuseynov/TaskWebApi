@@ -1,6 +1,6 @@
-﻿namespace WebApiProject.Dtos
+﻿namespace WebApiProject.Dtos.BookDto
 {
-    public class CreateBookDto
+    public class BaseBookDto
     {
         public string Title { get; set; }
         public string Description { get; set; }
