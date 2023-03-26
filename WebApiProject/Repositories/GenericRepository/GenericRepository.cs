@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using WebApiProject.DB;
 
 namespace WebApiProject.Repositories.GenericRepository
@@ -52,8 +51,8 @@ namespace WebApiProject.Repositories.GenericRepository
             var basebook = await GetEntity(id);
             if (basebook == null)
                 throw new InvalidOperationException("ჩანაწერი ვერ მოიძებნა");
-            var book = _mapper.Map<T>(req);
-            _dbContext.Entry(basebook).CurrentValues.SetValues(book);
+            var entryObject = _dbContext.Entry(basebook);
+            entryObject.CurrentValues.SetValues(req);
             await _dbContext.SaveChangesAsync();
             return await _dbContext.Set<T>().ToListAsync();
         }
