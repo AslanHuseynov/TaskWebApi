@@ -60,7 +60,7 @@ namespace WebApiProject.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("DisconnectAuthor")]
+        [HttpDelete("DisconnectBook")]
         public async Task<ActionResult<List<Book>>> DisconnectBook(int bookId, int authorId)
         {
             var author2Book = await _author2BookRepository.GetAuthor2Book(authorId, bookId);
