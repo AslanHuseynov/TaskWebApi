@@ -10,6 +10,8 @@ namespace WebApiProject.Repositories.AuthorRepository
         Task<Author> AddAuthor(CreateAuthorDto author);
         Task<List<Author>?> UpdateAuthor(UpdateAuthorDto updateAuthorDto);
         Task<List<Author>?> DeleteAuthor(int id);
+        Task<List<Author>> DisconnectBooks(Author2Book[] author2Books);
+
         Task<List<Author2Book>> ConnectToBooks(List<int> bookIds, int authorId);
     }
 }

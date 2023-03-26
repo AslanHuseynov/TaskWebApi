@@ -8,7 +8,7 @@ namespace WebApiProject.Repositories.BookRepository
 {
     public class BookRepository : GenericRepository<Book>, IBookRepository
     {
-        public BookRepository(DataContext context, IMapper mapper, IAuthor2BookRepository author2BookRepository) : base(context, mapper)
+        public BookRepository(DataContext context, IMapper mapper) : base(context, mapper)
         {
         }
 
@@ -36,12 +36,6 @@ namespace WebApiProject.Repositories.BookRepository
             await _dbContext.SaveChangesAsync();
             return author2Books;
         }
-        public async Task<List<Author2Book>> DeleteRange(Author2Book[] author2Books)
-        {
-            var entities = _dbContext.AuthorBooks;
-            entities.RemoveRange(author2Books);
-            await _dbContext.SaveChangesAsync();
-            return await entities.ToListAsync();
-        }
+        public async Task<List<Book>> DisconnectAuthors(Author2Book[] author2Books) => await DeleteRange(author2Books);
     }
 }
