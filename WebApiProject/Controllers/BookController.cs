@@ -53,6 +53,10 @@ namespace WebApiProject.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Book>>> AddBook(CreateBookDto createBookDto)
         {
+            var possibleExistedBook = await _bookRepository.GetBook(createBookDto.Title);
+            if (possibleExistedBook != null)
+                throw new InvalidOperationException($"{createBookDto.Title} is already existed");
+
             var result = await _bookRepository.AddBook(createBookDto);
             if (createBookDto.AuthorIds != null && createBookDto.AuthorIds.Any())
                 await _bookRepository.ConnectToAuthors(createBookDto.AuthorIds, result.Id);
