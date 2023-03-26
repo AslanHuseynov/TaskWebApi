@@ -10,10 +10,11 @@ namespace WebApiProject.Controllers
     public class BookController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
-
-        public BookController(IBookRepository bookRepository)
+        private readonly IAuthor2BookRepository _author2BookRepository;
+        public BookController(IBookRepository bookRepository, IAuthor2BookRepository author2BookRepository)
         {
             _bookRepository = bookRepository;
+            _author2BookRepository = author2BookRepository;
         }
 
         [HttpGet]
@@ -54,10 +55,16 @@ namespace WebApiProject.Controllers
         [HttpDelete("id")]
         public async Task<ActionResult<Book>> DeleteBook(int id)
         {
+
+            var authors2Books = (await _author2BookRepository.GetAuthors(id)).ToArray();
+            await _bookRepository.DeleteRange(authors2Books);
+
             var result = await _bookRepository.DeleteBook(id);
             if (result is null)
                 return BadRequest("Something is wrong");
-            
+
+
+
 
             return Ok(result);
         }

@@ -36,5 +36,12 @@ namespace WebApiProject.Repositories.BookRepository
             await _dbContext.SaveChangesAsync();
             return author2Books;
         }
+        public async Task<List<Author2Book>> DeleteRange(Author2Book[] author2Books)
+        {
+            var entities = _dbContext.AuthorBooks;
+            entities.RemoveRange(author2Books);
+            await _dbContext.SaveChangesAsync();
+            return await entities.ToListAsync();
+        }
     }
 }

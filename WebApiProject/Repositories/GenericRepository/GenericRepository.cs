@@ -32,6 +32,15 @@ namespace WebApiProject.Repositories.GenericRepository
             return await entities.ToListAsync();
         }
 
+        public async Task<List<T>?> DeleteRange(T[] values)
+        {
+            var entities = _dbContext.Set<T>();
+            entities.RemoveRange(values);
+            await _dbContext.SaveChangesAsync();
+            return await entities.ToListAsync();
+        }
+        
+
         public async Task<List<T>> GetAllEntity()
         {
             return await _dbContext.Set<T>().ToListAsync();
