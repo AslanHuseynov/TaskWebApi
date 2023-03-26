@@ -23,5 +23,13 @@ namespace WebApiProject.Repositories.AuthorRepository
             var req = _mapper.Map<Author>(updateAuthorDto);
             return await UpdateEntity(updateAuthorDto.Id, req);
         }
+
+        public async Task<List<Author2Book>> ConnectToBooks(List<int> bookIds, int authorId)
+        {
+            var author2Books = bookIds.Select(x => new Author2Book() { BookId = x, AuthorId = authorId }).ToList();
+            await _dbContext.AuthorBooks.AddRangeAsync(author2Books);
+            await _dbContext.SaveChangesAsync();
+            return author2Books;
+        }
     }
 }

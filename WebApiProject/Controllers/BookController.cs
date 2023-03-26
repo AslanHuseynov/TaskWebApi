@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApiProject.Dtos.BookDto;
+using WebApiProject.Repositories.AuthorRepository;
 using WebApiProject.Repositories.BookRepository;
 
 namespace WebApiProject.Controllers
@@ -9,9 +10,11 @@ namespace WebApiProject.Controllers
     public class BookController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
-        public BookController(IBookRepository bookRepository)
+        private readonly IAuthorRepository _authorRepository;
+        public BookController(IBookRepository bookRepository, IAuthorRepository authorRepository)
         {
             _bookRepository = bookRepository;
+            _authorRepository = authorRepository;
         }
 
         [HttpGet]
@@ -30,10 +33,14 @@ namespace WebApiProject.Controllers
             return Ok(result);
         }
 
+
+
         [HttpPost]
         public async Task<ActionResult<List<Book>>> AddBook(CreateBookDto createBookDto)
         {
             var result = await _bookRepository.AddBook(createBookDto);
+            if (createBookDto.AuthorIds != null && createBookDto.AuthorIds.Any())
+                await _bookRepository.ConnectToAuthors(createBookDto.AuthorIds, result.Id);
             return Ok(result);
         }
 

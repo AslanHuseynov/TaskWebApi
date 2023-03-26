@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using WebApiProject.DB;
 using WebApiProject.Dtos.BookDto;
+using WebApiProject.Models;
 using WebApiProject.Repositories.GenericRepository;
 
 namespace WebApiProject.Repositories.BookRepository
@@ -22,6 +23,21 @@ namespace WebApiProject.Repositories.BookRepository
         {
             var book = _mapper.Map<Book>(updateBookDto);
             return await UpdateEntity(updateBookDto.Id, book);
+        }
+        //public async Task<Author2Book> CreateAuthor2Book(int bookId, int authorId)
+        //{
+        //    var author2Book = new Author2Book() { AuthorId = authorId, BookId = bookId };
+        //    await _dbContext.AuthorBooks.AddAsync(author2Book);
+        //    await _dbContext.SaveChangesAsync();
+        //    return author2Book;
+        //}
+
+        public async Task<List<Author2Book>> ConnectToAuthors(List<int> authorIds, int bookId)
+        {
+            var author2Books = authorIds.Select(x => new Author2Book() { AuthorId = x, BookId = bookId }).ToList();
+            await _dbContext.AuthorBooks.AddRangeAsync(author2Books);
+            await _dbContext.SaveChangesAsync();
+            return author2Books;
         }
     }
 }

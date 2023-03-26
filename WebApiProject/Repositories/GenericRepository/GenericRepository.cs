@@ -5,7 +5,7 @@ namespace WebApiProject.Repositories.GenericRepository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BusinessObject
     {
-        private readonly DataContext _dbContext;
+        protected readonly DataContext _dbContext;
         protected readonly IMapper _mapper;
         public GenericRepository(DataContext context, IMapper mapper)
         {

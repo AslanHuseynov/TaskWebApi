@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApiProject.Dtos.AuthorDto;
+using WebApiProject.Dtos.BookDto;
 using WebApiProject.Repositories.AuthorRepository;
 
 namespace WebApiProject.Controllers
@@ -34,6 +35,8 @@ namespace WebApiProject.Controllers
         public async Task<ActionResult<List<Author>>> AddAuthor(CreateAuthorDto createAuthorDto)
         {
             var result = await _authorRepository.AddAuthor(createAuthorDto);
+            if (createAuthorDto.BookIds != null && createAuthorDto.BookIds.Any())
+                await _authorRepository.ConnectToBooks(createAuthorDto.BookIds, result.Id);
             return Ok(result);
         }
 
