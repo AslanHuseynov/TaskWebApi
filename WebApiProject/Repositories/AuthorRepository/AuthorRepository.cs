@@ -28,6 +28,11 @@ namespace WebApiProject.Repositories.AuthorRepository
             return await Entities.SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Author?> GetAuthor(string firstName, string lastName)
+        {
+            return await Entities.SingleOrDefaultAsync(x => x.FirstName == firstName && x.LastName == lastName);
+        }
+
         public async Task<List<Author>?> UpdateAuthor(UpdateAuthorDto updateAuthorDto)
         {
             var req = _mapper.Map<Author>(updateAuthorDto);

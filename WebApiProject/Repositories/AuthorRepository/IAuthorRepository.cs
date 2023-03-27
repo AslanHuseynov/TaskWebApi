@@ -7,6 +7,7 @@ namespace WebApiProject.Repositories.AuthorRepository
     {
         Task<List<Author>> GetAllAuthors();
         Task<Author?> GetAuthor(int id);
+        Task<Author?> GetAuthor(string firstName, string lastName);
         Task<Author> AddAuthor(CreateAuthorDto author);
         Task<List<Author>?> UpdateAuthor(UpdateAuthorDto updateAuthorDto);
         Task<List<Author>?> DeleteAuthor(int id);

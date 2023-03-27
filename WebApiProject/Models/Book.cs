@@ -7,6 +7,7 @@
         public double Rating { get; set; }
         public DateTime CreateDate { get; set; }
         public bool IsBought { get; set; }
+        public string Image { get; set; }
         public IList<Author2Book> AuthorBooks { get; set; }
     }
 }

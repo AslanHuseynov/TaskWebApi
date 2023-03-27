@@ -6,5 +6,6 @@
         public string Description { get; set; } = string.Empty;
         public double Rating { get; set; }
         public DateTime CreateDate { get; set; }
+        public string Image { get; set; }
     }
 }
