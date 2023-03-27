@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using Library.Domain.Models;
-using Library.Persistance.Implementations;
+﻿using Library.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using WebApiProject.Repositories.BookRepository;
 using WebApiProject.Repositories.LibraryRepository;
 
 namespace WebApiProject.Controllers
