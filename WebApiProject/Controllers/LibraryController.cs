@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using Library.Application.Dtos.BookDto;
+using Library.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using WebApiProject.Dtos.BookDto;
 using WebApiProject.Repositories.BookRepository;
 
 namespace WebApiProject.Controllers

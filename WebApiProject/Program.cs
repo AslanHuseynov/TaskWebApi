@@ -1,4 +1,3 @@
-global using WebApiProject.Models;
 using WebApiProject.DB;
 using WebApiProject.Repositories.Author2BookRepository;
 using WebApiProject.Repositories.AuthorRepository;

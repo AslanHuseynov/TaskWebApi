@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebApiProject.Dtos.BookDto;
+﻿using Library.Application.Dtos.BookDto;
+using Library.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 using WebApiProject.Repositories.Author2BookRepository;
 using WebApiProject.Repositories.BookRepository;
 

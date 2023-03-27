@@ -1,4 +1,5 @@
 ﻿global using Microsoft.EntityFrameworkCore;
+using Library.Domain.Models;
 
 namespace WebApiProject.DB
 {
