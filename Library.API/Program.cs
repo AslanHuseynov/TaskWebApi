@@ -1,5 +1,6 @@
 using Library.Persistance.DB;
 using Library.Persistance.Implementations;
+using Microsoft.EntityFrameworkCore;
 using WebApiProject.Repositories.Author2BookRepository;
 using WebApiProject.Repositories.AuthorRepository;
 using WebApiProject.Repositories.BookRepository;
@@ -7,6 +8,10 @@ using WebApiProject.Repositories.BookRepository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<DataContext>(options =>
+         options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"),
+         b => b.MigrationsAssembly("Library.API")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

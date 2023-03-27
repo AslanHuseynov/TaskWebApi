@@ -1,4 +1,4 @@
-﻿namespace WebApiProject.Repositories.LibraryRepository
+﻿namespace Library.Persistance.Implementations
 {
     public class LibraryRepository
     {

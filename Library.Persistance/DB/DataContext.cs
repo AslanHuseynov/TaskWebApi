@@ -1,19 +1,21 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 using Library.Domain.Models;
+using Microsoft.Extensions.Configuration;
 
-namespace WebApiProject.DB
+namespace Library.Persistance.DB
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        private readonly IConfiguration _configuration;
+        public DataContext(DbContextOptions<DataContext> options, IConfiguration configuration) : base(options)
         {
-            
+            _configuration = configuration;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=DESKTOP-THVOU75\\MSSQLSERVER02;Database=booksappdb;Trusted_Connection=true;TrustServerCertificate=true;");
+            //optionsBuilder.UseSqlServer(_configuration.GetConnectionString("MyConnectionString"), b => b.MigrationsAssembly("Library.API"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

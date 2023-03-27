@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Library.Application.Dtos.AuthorDto;
 using Library.Domain.Models;
-using WebApiProject.DB;
-using WebApiProject.Repositories.GenericRepository;
+using Library.Persistance.DB;
+using WebApiProject.Repositories.AuthorRepository;
 
-namespace WebApiProject.Repositories.AuthorRepository
+namespace Library.Persistance.Implementations
 {
     public class AuthorRepository : GenericRepository<Author>, IAuthorRepository
     {

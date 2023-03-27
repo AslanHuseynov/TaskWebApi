@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Library.Application.Dtos.BookDto;
 using Library.Domain.Models;
-using WebApiProject.DB;
-using WebApiProject.Repositories.GenericRepository;
+using Library.Persistance.DB;
+using WebApiProject.Repositories.BookRepository;
 
-namespace WebApiProject.Repositories.BookRepository
+namespace Library.Persistance.Implementations
 {
     public class BookRepository : GenericRepository<Book>, IBookRepository
     {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Library.Domain.Models;
-using WebApiProject.DB;
-using WebApiProject.Repositories.GenericRepository;
+using Library.Persistance.DB;
+using WebApiProject.Repositories.Author2BookRepository;
 
-namespace WebApiProject.Repositories.Author2BookRepository
+namespace Library.Persistance.Implementations
 {
     public class Author2BookRepository : GenericRepository<Author2Book>, IAuthor2BookRepository
     {
@@ -17,7 +17,7 @@ namespace WebApiProject.Repositories.Author2BookRepository
         }
         public async Task<List<Author2Book>?> DeleteAuthor2Book(int id) => await DeleteEntity(id);
 
-        public async Task<Author2Book?> GetAuthor2Book(int authorId, int bookId) => 
+        public async Task<Author2Book?> GetAuthor2Book(int authorId, int bookId) =>
             await _dbContext.AuthorBooks.SingleOrDefaultAsync(x => x.AuthorId == authorId && x.BookId == bookId);
 
         public async Task<List<Author2Book>> GetAuthors(int bookId) =>

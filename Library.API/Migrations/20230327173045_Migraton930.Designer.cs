@@ -4,16 +4,19 @@ using Library.Persistance.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace WebApiProject.Migrations
+namespace Library.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230327173045_Migraton930")]
+    partial class Migraton930
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace WebApiProject.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApiProject.Models.Author", b =>
+            modelBuilder.Entity("Library.Domain.Models.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +49,7 @@ namespace WebApiProject.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("WebApiProject.Models.Author2Book", b =>
+            modelBuilder.Entity("Library.Domain.Models.Author2Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +72,7 @@ namespace WebApiProject.Migrations
                     b.ToTable("AuthorBooks");
                 });
 
-            modelBuilder.Entity("WebApiProject.Models.Book", b =>
+            modelBuilder.Entity("Library.Domain.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +87,11 @@ namespace WebApiProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsBought")
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsTaken")
                         .HasColumnType("bit");
 
                     b.Property<double>("Rating")
@@ -99,15 +106,15 @@ namespace WebApiProject.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("WebApiProject.Models.Author2Book", b =>
+            modelBuilder.Entity("Library.Domain.Models.Author2Book", b =>
                 {
-                    b.HasOne("WebApiProject.Models.Author", "Author")
+                    b.HasOne("Library.Domain.Models.Author", "Author")
                         .WithMany("AuthorBooks")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApiProject.Models.Book", "Book")
+                    b.HasOne("Library.Domain.Models.Book", "Book")
                         .WithMany("AuthorBooks")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -118,12 +125,12 @@ namespace WebApiProject.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("WebApiProject.Models.Author", b =>
+            modelBuilder.Entity("Library.Domain.Models.Author", b =>
                 {
                     b.Navigation("AuthorBooks");
                 });
 
-            modelBuilder.Entity("WebApiProject.Models.Book", b =>
+            modelBuilder.Entity("Library.Domain.Models.Book", b =>
                 {
                     b.Navigation("AuthorBooks");
                 });

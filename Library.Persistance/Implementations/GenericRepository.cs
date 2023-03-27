@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Library.Domain.Models;
-using WebApiProject.DB;
+using Library.Persistance.DB;
+using WebApiProject.Repositories.GenericRepository;
 
-namespace WebApiProject.Repositories.GenericRepository
+namespace Library.Persistance.Implementations
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BusinessObject
     {
@@ -40,7 +41,7 @@ namespace WebApiProject.Repositories.GenericRepository
             await _dbContext.SaveChangesAsync();
             return await _dbContext.Set<T>().ToListAsync();
         }
-        
+
 
         public async Task<List<T>> GetAllEntity()
         {

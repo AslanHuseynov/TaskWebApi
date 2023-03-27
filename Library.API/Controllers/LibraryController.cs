@@ -18,7 +18,7 @@ namespace WebApiProject.Controllers
             _mapper = mapper;
         }
 
-        [HttpPut]
+        [HttpPut("Borrow")]
         public async Task<ActionResult<Book>> BorrowBook(int bookId)
         {
             var book = await _bookRepository.GetBook(bookId);
@@ -31,7 +31,7 @@ namespace WebApiProject.Controllers
             var result = await _bookRepository.UpdateBook(updateBookDto);
             return Ok(updateBookDto);
         }
-        [HttpPut]
+        [HttpPut("Return")]
         public async Task<ActionResult<Book>> ReturnBook(int bookId)
         {
             var book = await _bookRepository.GetBook(bookId);
