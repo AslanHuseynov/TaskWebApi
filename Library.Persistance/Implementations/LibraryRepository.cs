@@ -20,7 +20,7 @@ namespace Library.Persistance.Implementations
         {
             var book = await CheckBook(bookId);
             if (book.IsTaken)
-                throw new InvalidOperationException($"{book.Title} is already avaialble");
+                throw new InvalidOperationException($"{book.Title} is already taken");
             var updatedBook = await UpdateBookAvailability(true, book);
             return updatedBook;
         }

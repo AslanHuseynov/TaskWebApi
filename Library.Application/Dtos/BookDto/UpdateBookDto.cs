@@ -3,5 +3,6 @@
     public class UpdateBookDto : BaseBookDto
     {
         public int Id { get; set; }
+        public bool IsTaken { get; set; }
     }
 }
