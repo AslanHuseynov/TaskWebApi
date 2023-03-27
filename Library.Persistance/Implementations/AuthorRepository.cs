@@ -34,7 +34,7 @@ namespace Library.Persistance.Implementations
             return await Entities.SingleOrDefaultAsync(x => x.FirstName == firstName && x.LastName == lastName);
         }
 
-        public async Task<List<Author>?> UpdateAuthor(UpdateAuthorDto updateAuthorDto)
+        public async Task<Author> UpdateAuthor(UpdateAuthorDto updateAuthorDto)
         {
             var req = _mapper.Map<Author>(updateAuthorDto);
             return await UpdateEntity(updateAuthorDto.Id, req);

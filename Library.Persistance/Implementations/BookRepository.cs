@@ -23,7 +23,7 @@ namespace Library.Persistance.Implementations
 
         public async Task<Book?> GetBook(int id) => await Entities.SingleOrDefaultAsync(x => x.Id == id);
         public async Task<Book?> GetBook(string title) => await Entities.SingleOrDefaultAsync(x => x.Title == title);
-        public async Task<List<Book>?> UpdateBook(UpdateBookDto updateBookDto)
+        public async Task<Book> UpdateBook(UpdateBookDto updateBookDto)
         {
             var book = _mapper.Map<Book>(updateBookDto);
             return await UpdateEntity(updateBookDto.Id, book);

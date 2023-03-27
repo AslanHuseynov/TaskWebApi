@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Library.Application.Dtos.BookDto;
 using Library.Domain.Models;
-using Library.Persistance.DB;
 using WebApiProject.Repositories.BookRepository;
 using WebApiProject.Repositories.LibraryRepository;
 
@@ -16,14 +16,34 @@ namespace Library.Persistance.Implementations
             _bookRepository = bookRepository;
         }
 
-        public Task<Book> Borrow(int bookId)
+        public async Task<Book> Borrow(int bookId)
         {
-            _bookRepository.GetBook();
+            var book = await CheckBook(bookId);
+            if (book.IsTaken)
+                throw new InvalidOperationException($"{book.Title} is already avaialble");
+            var updatedBook = await UpdateBookAvailability(true, book);
+            return updatedBook;
         }
-
-        public Task<Book> Return(int bookId)
+        private async Task<Book> CheckBook(int bookId)
         {
-            throw new NotImplementedException();
+            var book = await _bookRepository.GetBook(bookId);
+            if (book == null)
+                throw new InvalidOperationException("Couldn't find the book");
+            return book;
+        }
+        private async Task<Book> UpdateBookAvailability(bool isTaken, Book book)
+        {
+            book.IsTaken = isTaken;
+            var updateBookDto = _mapper.Map<UpdateBookDto>(book);
+            return await _bookRepository.UpdateBook(updateBookDto);
+        }
+        public async Task<Book> Return(int bookId)
+        {
+            var book = await CheckBook(bookId);
+            if (!book.IsTaken)
+                throw new InvalidOperationException("How did you get this book?!");
+            var updatedBook = await UpdateBookAvailability(false, book);
+            return updatedBook;
         }
     }
 }

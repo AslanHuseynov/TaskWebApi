@@ -7,7 +7,7 @@ namespace WebApiProject.Repositories.GenericRepository
         Task<List<T>> GetAllEntity();
         Task<T?> GetEntity(int id);
         Task<T> AddEntity(T entity);
-        Task<List<T>?> UpdateEntity(int id, T req);
+        Task<T> UpdateEntity(int id, T req);
         Task<List<T>?> DeleteEntity(int id);
         Task<List<T>> DeleteRange<Y>(Y[] values) where Y : BusinessObject;
     }

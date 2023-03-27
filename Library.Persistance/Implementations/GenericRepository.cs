@@ -50,22 +50,19 @@ namespace Library.Persistance.Implementations
 
         public async Task<T?> GetEntity(int id)
         {
-            var Author = await _dbContext.Set<T>().FindAsync(id);
-            if (Author is null)
-                return null;
-
-            return Author;
+            var entity = await _dbContext.Set<T>().FindAsync(id);
+            return entity;
         }
 
-        public async Task<List<T>?> UpdateEntity(int id, T req)
+        public async Task<T> UpdateEntity(int id, T req)
         {
-            var basebook = await GetEntity(id);
-            if (basebook == null)
+            var entity = await GetEntity(id);
+            if (entity == null)
                 throw new InvalidOperationException("ჩანაწერი ვერ მოიძებნა");
-            var entryObject = _dbContext.Entry(basebook);
+            var entryObject = _dbContext.Entry(entity);
             entryObject.CurrentValues.SetValues(req);
             await _dbContext.SaveChangesAsync();
-            return await _dbContext.Set<T>().ToListAsync();
+            return entity;
         }
     }
 }

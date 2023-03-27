@@ -9,7 +9,7 @@ namespace WebApiProject.Repositories.AuthorRepository
         Task<Author?> GetAuthor(int id);
         Task<Author?> GetAuthor(string firstName, string lastName);
         Task<Author> AddAuthor(CreateAuthorDto author);
-        Task<List<Author>?> UpdateAuthor(UpdateAuthorDto updateAuthorDto);
+        Task<Author> UpdateAuthor(UpdateAuthorDto updateAuthorDto);
         Task<List<Author>?> DeleteAuthor(int id);
         Task<List<Author>> DisconnectBooks(Author2Book[] author2Books);
 
